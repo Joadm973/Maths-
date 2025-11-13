@@ -1,0 +1,17 @@
+# Fichiers de données volumineux (trop gros pour GitHub)
+hashtag_donaldtrump.csv
+hashtag_joebiden.csv
+ap_votes.csv
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environnements virtuels
+venv/
+env/
+ENV/
