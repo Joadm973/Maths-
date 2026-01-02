@@ -484,3 +484,4 @@ Néanmoins, l'analyse révèle des **patterns géographiques cohérents** et con
 - Créer des visualisations géospatiales professionnelles
 
 - Mener une analyse critique des limites méthodologiques
+
