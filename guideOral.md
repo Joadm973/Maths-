@@ -160,6 +160,17 @@ Mais est-ce que cette légère différence de polarité se traduit dans les urne
 
 "Pour établir une corrélation entre les sentiments Twitter et les votes réels, j'ai implémenté un modèle de **régression linéaire par les moindres carrés**.
 
+**Pourquoi la régression linéaire ?**
+
+L'objectif est de déterminer s'il existe une **relation mathématique** entre deux variables :
+- La **variable X** : la polarité moyenne des tweets par État
+- La **variable Y** : le pourcentage de votes réels obtenus par chaque candidat dans cet État
+
+La régression linéaire me permet de :
+1. **Modéliser cette relation** par une droite d'équation y = mx + b
+2. **Quantifier la force de cette relation** avec le coefficient R²
+3. **Tester l'hypothèse** : est-ce que la polarité Twitter peut prédire le vote ?
+
 Et j'insiste sur un point important : j'ai codé cette régression **from scratch**, sans utiliser de bibliothèque préexistante comme scikit-learn. L'objectif était de maîtriser chaque aspect du calcul et de vraiment comprendre les fondements mathématiques.
 
 Voici les **formules fondamentales** que j'ai utilisées :
