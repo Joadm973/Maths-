@@ -4,12 +4,6 @@
 
 ---
 
-**Auteur :** [Votre nom]  
-**Date :** 6 janvier 2026  
-**Cours :** Mathématiques - Analyse de données  
-
----
-
 ## Table des matières
 
 1. [Contexte et problématiques](#1-contexte-et-problématiques)
@@ -236,11 +230,13 @@ Les fonctions `WinnerPolarity` et `LoserPolarity` ont permis de comparer les sen
 
 ### 5.1 Limites techniques
 
-| Limite | Impact | Mitigation possible |
-|--------|--------|---------------------|
-| **Détection de langue** | Faux positifs/négatifs sur tweets courts ou slang | Utiliser des modèles plus sophistiqués |
-| **TextBlob pour sentiment** | Ne détecte pas sarcasme, ironie | Utiliser BERT ou modèles spécialisés |
-| **Géolocalisation autodéclarée** | Données manquantes ou incorrectes | Croiser avec d'autres sources |
+| Limite technique | Description de l'impact | Mitigation possible | Priorité |
+|------------------|------------------------|---------------------|----------|
+| **Détection de langue (langdetect)** | Faux positifs/négatifs sur tweets courts, utilisation de slang ou de multilinguisme | Utiliser des modèles plus sophistiqués (FastText, spaCy) avec seuil de confiance | Moyenne |
+| **TextBlob pour analyse de sentiment** | Ne détecte pas le sarcasme, l'ironie, le contexte politique spécifique. Modèle entraîné sur corpus généraliste | Utiliser des modèles transformers pré-entraînés (BERT, RoBERTa) ou fine-tuner sur données politiques | Haute |
+| **Géolocalisation autodéclarée** | ~30-40% de données manquantes, informations incorrectes ou vagues (ex: "USA" sans État précis) | Croiser avec métadonnées IP, analyse de texte pour indices géographiques, enrichissement via API tierces | Haute |
+| **Volume de données** | Temps de traitement long (~15-30 min pour 1.7M tweets), limitations mémoire | Optimisation avec Dask, traitement par batch, parallélisation, utilisation de bases de données | Moyenne |
+| **Nettoyage de texte** | Risque de supprimer des informations pertinentes (ex: émotions dans emojis) | Équilibrer nettoyage et conservation du signal, analyser emojis séparément | Faible |
 
 ### 5.2 Limites méthodologiques
 
@@ -272,10 +268,13 @@ Les fonctions `WinnerPolarity` et `LoserPolarity` ont permis de comparer les sen
 
 Cette étude a permis de :
 
-✅ **Quantifier le sentiment Twitter** envers Trump et Biden par État  
-✅ **Appliquer la régression linéaire par moindres carrés** (développée from scratch)  
-✅ **Visualiser géographiquement** les sentiments et résultats électoraux  
-❌ **Établir une corrélation forte** entre sentiment Twitter et votes réels  
+- **Quantifier le sentiment Twitter** envers Trump et Biden par État
+- **Appliquer la régression linéaire par moindres carrés** (développée from scratch)
+- **Visualiser géographiquement** les sentiments et résultats électoraux
+
+En revanche, nous n'avons pas pu :
+
+- **Établir une corrélation forte** entre sentiment Twitter et votes réels  
 
 ### 6.2 Réponse à la problématique principale
 
@@ -304,45 +303,35 @@ Les coefficients R² faibles (<0.15) démontrent que la polarité Twitter n'expl
 
 ### 6.4 Conclusion finale
 
-Cette étude illustre l'importance de **ne pas surinterpréter les données des réseaux sociaux**. Bien que Twitter offre un aperçu intéressant de l'opinion publique, il ne peut remplacer les méthodes traditionnelles de sondage électoral. Les réseaux sociaux doivent être considérés comme un **complément**, et non un substitut, pour comprendre le comportement électoral.
+Cette étude illustre l'importance de ne pas surinterpréter les données des réseaux sociaux. Bien que Twitter offre un aperçu intéressant de l'opinion publique, il ne peut remplacer les méthodes traditionnelles de sondage électoral. Les réseaux sociaux doivent être considérés comme un complément, et non un substitut, pour comprendre le comportement électoral.
 
 ---
 
 ## Annexes
 
-### A. Formules mathématiques utilisées
+###  Formules mathématiques utilisées
 
-**Régression linéaire :**
-```
-a = (Σxy - (Σx)(Σy)/n) / (Σx² - (Σx)²/n)
-b = ȳ - a·x̄
-R² = 1 - SC_res/SC_tot
-```
+#### Régression linéaire par les moindres carrés
 
-**Polarité (TextBlob) :**
-```
-polarity ∈ [-1, +1]
-subjectivity ∈ [0, 1]
-```
+**Calcul de la pente (a) :**
 
-### B. Structure du code
+$$a = \frac{\sum x_i y_i - \frac{(\sum x_i)(\sum y_i)}{n}}{\sum x_i^2 - \frac{(\sum x_i)^2}{n}} = \frac{s_{xy}}{s_x^2}$$
 
-```
-analyse_twitter.ipynb
-├── Section 1-10: Chargement et exploration des données
-├── Section 11-27: OBJECTIF 1 - Analyse des sentiments
-├── Section 28-45: OBJECTIF 2 - Corrélation sentiments-votes
-├── Section 46-72: OBJECTIF 3 - Cartes choroplèthes
-└── Section 73-80: Analyse et conclusion
-```
+**Calcul de l'ordonnée à l'origine (b) :**
 
-### C. Références
+$$b = \bar{y} - a\bar{x}$$
 
-- Cours de Mathématiques - Régression linéaire (pages 25-41)
-- Documentation TextBlob : https://textblob.readthedocs.io/
-- Associated Press Election Data : https://apnews.com/
-- US Census Bureau Shapefiles : https://www.census.gov/
+**Coefficient de détermination (R²) :**
 
----
+$$R^2 = 1 - \frac{SC_{res}}{SC_{tot}} = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$$
 
-*Rapport généré le 6 janvier 2026*
+#### Analyse de sentiment (TextBlob)
+
+**Polarité :**
+
+$$\text{polarité} \in [-1, +1]$$
+
+**Subjectivité :**
+
+$$\text{subjectivité} \in [0, 1]$$
+
