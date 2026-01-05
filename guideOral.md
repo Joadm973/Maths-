@@ -158,37 +158,30 @@ Mais est-ce que cette légère différence de polarité se traduit dans les urne
 
 > **[Afficher slide 8]**
 
-"Pour établir une corrélation entre les sentiments Twitter et les votes réels, j'ai implémenté un modèle de **régression linéaire par les moindres carrés**.
+"Pour répondre à ma question de départ — **Twitter peut-il prédire le vote ?** — j'ai utilisé une **régression linéaire**.
 
-**Pourquoi la régression linéaire ?**
+**Concrètement, qu'est-ce que je cherche à faire ?**
 
-L'objectif est de déterminer s'il existe une **relation mathématique** entre deux variables :
-- La **variable X** : la polarité moyenne des tweets par État
-- La **variable Y** : le pourcentage de votes réels obtenus par chaque candidat dans cet État
+Je veux savoir s'il existe un lien entre :
+- La **polarité des tweets** dans un État (sentiment positif ou négatif)
+- Le **pourcentage de votes** obtenu par le candidat dans ce même État
 
-La régression linéaire me permet de :
-1. **Modéliser cette relation** par une droite d'équation y = mx + b
-2. **Quantifier la force de cette relation** avec le coefficient R²
-3. **Tester l'hypothèse** : est-ce que la polarité Twitter peut prédire le vote ?
+Par exemple : si les tweets sont très positifs pour Trump dans le Texas, est-ce qu'il obtient effectivement beaucoup de votes au Texas ?
 
-Et j'insiste sur un point important : j'ai codé cette régression **from scratch**, sans utiliser de bibliothèque préexistante comme scikit-learn. L'objectif était de maîtriser chaque aspect du calcul et de vraiment comprendre les fondements mathématiques.
+**Comment fonctionne la régression linéaire ?**
 
-Voici les **formules fondamentales** que j'ai utilisées :
+La régression linéaire trace une **droite** qui passe au plus près de tous les points. Cette droite a une équation : **y = mx + b**.
 
-Pour la **pente m** :
-$$m = \frac{n \sum xy - \sum x \sum y}{n \sum x^2 - (\sum x)^2}$$
+Vous voyez les formules à l'écran pour calculer m et b. Ce sont les **formules des moindres carrés** que nous avons vues en cours de statistiques.
 
-Pour l'**ordonnée à l'origine b** :
-$$b = \frac{\sum y - m \sum x}{n}$$
+**Comment savoir si ça marche ?**
 
-Ces formules sont exactement celles de la régression linéaire par les moindres carrés que nous avons vues en cours.
+C'est là qu'intervient le **coefficient R²**. C'est un chiffre entre 0 et 1 qui mesure la qualité de la prédiction :
 
-Le **coefficient R²**, ou coefficient de détermination, est essentiel pour évaluer la qualité de mon modèle. Il mesure la **proportion de la variance des votes** qui est expliquée par la polarité des tweets.
+- Si R² est proche de **1** : excellente prédiction ! La polarité Twitter explique bien le vote.
+- Si R² est proche de **0** : mauvaise prédiction. Pas de lien entre Twitter et le vote.
 
-- Un R² proche de 1 signifie que le modèle explique bien les données
-- Un R² proche de 0 signifie que le modèle n'explique presque rien
-
-L'**objectif** était d'établir si la polarité moyenne des tweets par État pouvait prédire le pourcentage de votes obtenus par chaque candidat dans ces mêmes États."
+Mon **objectif** était donc de calculer ce R² pour Trump et pour Biden, afin de voir si l'opinion sur Twitter reflète vraiment les résultats électoraux."
 
 ---
 
