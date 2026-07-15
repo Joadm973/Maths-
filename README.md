@@ -1,70 +1,70 @@
-# TP Maths - Étude des corrélations dans les élections sur Twitter
+# TP Maths - Study of Correlations in Elections on Twitter
 
-## 📊 Description du projet
+## Description
 
-Analyse statistique et géographique des tweets liés aux élections américaines de 2020, étudiant les corrélations entre le sentiment Twitter et les résultats de vote.
+Statistical and geographical analysis of tweets related to the 2020 American elections, studying the correlations between Twitter sentiment and voting results.
 
-## 🎯 Objectifs du TP
+## Objectives
 
-1. **Analyse de sentiment** : Calcul de la polarité et subjectivité des tweets
-2. **Corrélations statistiques** : Régressions linéaires entre sentiment Twitter et résultats électoraux
-3. **Visualisations géographiques** : Cartes choroplèthes par État
+1. **Sentiment Analysis**: Calculation of polarity and subjectivity of tweets
+2. **Statistical Correlations**: Linear regressions between Twitter sentiment and electoral results
+3. **Geographical Visualizations**: Choropleth maps by state
 
-## 📁 Structure du projet
+## Project Structure
 
-- `analyse_twitter.ipynb` : Notebook principal contenant toute l'analyse
-- `cb_2018_us_state_500k.zip` : Shapefile des États américains
-- Documentation :
-  - `PLAN_SOUTENANCE.md` : Structure de la présentation orale
-  - `REPONSES_QUESTIONS_JURY.md` : Réponses aux questions potentielles du jury
-  - `CHECKLIST_PREPARATION.md` : Liste de vérification pour la préparation
-  - `README_SOUTENANCE.md` : Guide complet pour la soutenance
+- `analyse_twitter.ipynb`: Main notebook containing all analysis
+- `cb_2018_us_state_500k.zip`: Shapefile of American states
+- Documentation:
+  - `PLAN_SOUTENANCE.md`: Structure of the oral presentation
+  - `REPONSES_QUESTIONS_JURY.md`: Answers to potential jury questions
+  - `CHECKLIST_PREPARATION.md`: Preparation checklist
+  - `README_SOUTENANCE.md`: Complete guide for the presentation
 
-## 📥 Données requises
+## Required Data
 
-**⚠️ Les fichiers CSV sont trop volumineux pour GitHub (> 100 MB)**
+**Note: CSV files are too large for GitHub (> 100 MB)**
 
-Vous devez télécharger les fichiers de données suivants :
+You must download the following data files:
 - `hashtag_donaldtrump.csv` (461 MB)
 - `hashtag_joebiden.csv` (363 MB)
 - `ap_votes.csv`
 
-Placez ces fichiers dans le même répertoire que le notebook avant d'exécuter l'analyse.
+Place these files in the same directory as the notebook before running the analysis.
 
-## 🚀 Installation et exécution
+## Installation and Setup
 
-### Prérequis
+### Prerequisites
 
 ```bash
 pip install pandas numpy matplotlib seaborn textblob langdetect nltk wordcloud geopandas shapely
 ```
 
-### Téléchargement des ressources NLTK
+### Download NLTK Resources
 
 ```python
 import nltk
 nltk.download('stopwords')
 ```
 
-### Exécution
+### Execution
 
-1. Clonez ce dépôt
-2. Téléchargez les fichiers CSV (voir section "Données requises")
-3. Ouvrez `analyse_twitter.ipynb` dans Jupyter
-4. Exécutez toutes les cellules
+1. Clone this repository
+2. Download the CSV files (see "Required Data" section)
+3. Open `analyse_twitter.ipynb` in Jupyter
+4. Run all cells
 
-## 📈 Technologies utilisées
+## Technologies Used
 
 - **Python 3.x**
-- **Analyse de données** : pandas, numpy
-- **Visualisation** : matplotlib, seaborn, wordcloud
-- **NLP** : TextBlob, langdetect, nltk
-- **Cartographie** : GeoPandas, shapely
+- **Data Analysis**: pandas, numpy
+- **Visualization**: matplotlib, seaborn, wordcloud
+- **NLP**: TextBlob, langdetect, nltk
+- **Mapping**: GeoPandas, shapely
 
-## 👤 Auteur
+## Author
 
-Projet réalisé dans le cadre du cours de Mathématiques - B3 Ynov
+Project completed as part of the Mathematics course - B3 Ynov
 
-## 📝 Licence
+## License
 
-Projet académique - Tous droits réservés
+Academic project - All rights reserved
